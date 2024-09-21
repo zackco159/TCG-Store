@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="product-detail">
-        <img src="images/product1.jpg" alt="Product Image">
+        <img src="images/product1.jpg" alt="Hình Sản Phẩm">
         <h1>Tên Sản Phẩm</h1>
         <p>Mô tả sản phẩm chi tiết.</p>
         <p>Giá: 100.000 VNĐ</p>
@@ -24,13 +24,6 @@
             };
             addToCart(product);
         });
-
-        function addToCart(product) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.push(product);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert('Sản phẩm đã được thêm vào giỏ hàng!');
-        }
     </script>
 </body>
 </html>

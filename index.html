@@ -10,17 +10,20 @@
     <header>
         <h1>Cửa Hàng TCG</h1>
         <input type="text" id="search" placeholder="Tìm kiếm sản phẩm...">
-        <button id="cart-btn">Giỏ Hàng (0)</button>
+        <div class="cart-icon" onclick="toggleCart()">
+            Giỏ hàng (<span id="cart-count">0</span>)
+        </div>
     </header>
 
     <main id="product-list">
         <!-- Danh sách sản phẩm sẽ được tạo ra ở đây -->
     </main>
 
-    <div id="cart-window" class="cart-window">
-        <h2>Giỏ Hàng</h2>
-        <div id="cart-items"></div>
-        <button id="checkout-btn">Thanh Toán</button>
+    <div id="cart-popup" class="cart-popup">
+        <h3>Giỏ Hàng</h3>
+        <div id="cart-list"></div>
+        <button onclick="checkout()">Thanh Toán</button>
+        <button onclick="toggleCart()">Đóng</button>
     </div>
 
     <script src="script.js"></script>
