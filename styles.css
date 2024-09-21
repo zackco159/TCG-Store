@@ -38,7 +38,7 @@ button:hover {
 }
 
 .cart-popup {
-    display: none;
+    display: none; /* Bắt đầu ẩn */
     position: fixed;
     top: 50px;
     right: 20px;
@@ -47,7 +47,9 @@ button:hover {
     padding: 20px;
     width: 300px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Đảm bảo nó ở trên cùng */
 }
+
 
 .cart-popup h3 {
     margin: 0 0 10px;

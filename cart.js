@@ -80,11 +80,16 @@ function checkout() {
 // Bật tắt giỏ hàng
 function toggleCart() {
     const cartPopup = document.getElementById('cart-popup');
-    cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : 'block';
+    if (cartPopup.style.display === 'block') {
+        cartPopup.style.display = 'none';
+    } else {
+        cartPopup.style.display = 'block';
+        displayCart(); // Hiển thị giỏ hàng khi mở
+    }
 }
 
 // Gọi hàm hiển thị giỏ hàng khi trang được tải
 document.addEventListener('DOMContentLoaded', () => {
-    displayCart();
-    updateCartCount();
+    updateCartCount(); // Cập nhật số lượng khi trang tải
+    displayCart(); // Hiển thị giỏ hàng
 });
