@@ -7,23 +7,43 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="product-detail">
-        <img src="images/product1.jpg" alt="Hình Sản Phẩm">
-        <h1>Tên Sản Phẩm</h1>
-        <p>Mô tả sản phẩm chi tiết.</p>
-        <p>Giá: 100.000 VNĐ</p>
-        <button id="add-to-cart">Thêm vào giỏ hàng</button>
+    <header>
+        <h1>Chi Tiết Sản Phẩm</h1>
+        <div class="cart-icon" onclick="toggleCart()">
+            Giỏ hàng (<span id="cart-count">0</span>)
+        </div>
+    </header>
+
+    <main id="product-detail">
+        <!-- Chi tiết sản phẩm sẽ được tạo ra ở đây -->
+    </main>
+
+    <div id="cart-popup" class="cart-popup">
+        <h3>Giỏ Hàng</h3>
+        <div id="cart-list"></div>
+        <button onclick="checkout()">Thanh Toán</button>
+        <button onclick="toggleCart()">Đóng</button>
     </div>
 
+    <script src="script.js"></script>
     <script>
-        document.getElementById('add-to-cart').addEventListener('click', function() {
-            const product = {
-                id: 'product1', // ID sản phẩm
-                name: 'Tên Sản Phẩm',
-                price: 100000
-            };
-            addToCart(product);
-        });
+        // Lấy ID sản phẩm từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        // Tìm sản phẩm theo ID
+        const product = products.find(p => p.id == productId);
+
+        // Hiển thị chi tiết sản phẩm
+        if (product) {
+            document.getElementById('product-detail').innerHTML = `
+                <h2>${product.name}</h2>
+                <p>Giá: ${product.price} VNĐ</p>
+                <button onclick="addToCart({id: ${product.id}, name: '${product.name}', price: ${product.price}})">Thêm vào giỏ hàng</button>
+            `;
+        } else {
+            document.getElementById('product-detail').innerHTML = '<p>Sản phẩm không tồn tại.</p>';
+        }
     </script>
 </body>
 </html>
