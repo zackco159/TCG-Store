@@ -5,13 +5,9 @@ const cors = require('cors');
 
 // Khởi tạo ứng dụng Express
 const app = express();
-app.use(cors()); // Cho phép mọi miền truy cập vào API
-app.use(express.json()); // Để xử lý dữ liệu JSON
-app.get('/', (req, res) => {
-    res.send('Hello, TCG Store!');
-});
+app.use(cors());
+app.use(express.json());
 
-// Thiết lập cổng
 const PORT = process.env.PORT || 5000;
 
 // Kết nối tới MongoDB
@@ -19,7 +15,7 @@ mongoose.connect('mongodb://localhost:27017/tcg-store', { useNewUrlParser: true,
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
 
-// Định nghĩa Schema và Model cho thẻ bài (Card)
+// Định nghĩa Schema và Model cho thẻ bài
 const cardSchema = new mongoose.Schema({
     name: String,
     description: String,
