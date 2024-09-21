@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="product-detail">
+        <img src="images/product1.jpg" alt="Product Image">
+        <h1>Tên Sản Phẩm</h1>
+        <p>Mô tả sản phẩm chi tiết.</p>
+        <p>Giá: 100.000 VND</p>
+        <button id="add-to-cart">Thêm vào giỏ hàng</button>
+    </div>
+
+    <script>
+        document.getElementById('add-to-cart').addEventListener('click', function() {
+            const product = {
+                id: 'product1', // ID sản phẩm
+                name: 'Tên Sản Phẩm',
+                price: 100000
+            };
+
+            // Lấy giỏ hàng từ LocalStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Thêm sản phẩm vào giỏ hàng
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            alert('Sản phẩm đã được thêm vào giỏ hàng!');
+        });
+    </script>
+</body>
+</html>

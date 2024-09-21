@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa Hàng TCG</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Cửa Hàng TCG</h1>
+        <input type="text" id="search" placeholder="Tìm kiếm sản phẩm...">
+    </header>
+
+    <main id="product-list">
+        <!-- Danh sách sản phẩm sẽ được tạo ra ở đây -->
+    </main>
+
+    <script>
+        // Dữ liệu sản phẩm
+        const products = [
+            { id: 1, name: "Sản phẩm 1", price: 100 },
+            { id: 2, name: "Sản phẩm 2", price: 200 },
+            { id: 3, name: "Sản phẩm 3", price: 150 }
+        ];
+
+        // Hàm để hiển thị sản phẩm
+        function displayProducts() {
+            const productList = document.getElementById("product-list");
+            productList.innerHTML = ""; // Xóa nội dung cũ
+
+            products.forEach(product => {
+                const productDiv = document.createElement("div");
+                productDiv.classList.add("product");
+                productDiv.innerHTML = `
+                    <h2>${product.name}</h2>
+                    <p>Giá: ${product.price} VNĐ</p>
+                    <button class="btn-add" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}">Thêm vào giỏ</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+        }
+
+        // Hàm tìm kiếm sản phẩm
+        document.getElementById('search').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            const productDivs = document.querySelectorAll('.product');
+            
+            productDivs.forEach(productDiv => {
+                const name = productDiv.querySelector('h2').textContent.toLowerCase();
+                productDiv.style.display = name.includes(query) ? 'block' : 'none';
+            });
+        });
+
+        // Hiển thị sản phẩm khi trang tải
+        displayProducts();
+    </script>
+</body>
+</html>
