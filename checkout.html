@@ -4,11 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thanh Toán</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Thanh Toán</h1>
-    <p>Cảm ơn bạn đã mua hàng!</p>
-    <p><img src="images/qrcode.png" alt="Mã QR Thanh Toán" /></p>
-    <a href="index.html">Quay lại cửa hàng</a>
+    <header>
+        <h1>Thanh Toán</h1>
+    </header>
+
+    <main>
+        <h2>Thông tin giỏ hàng</h2>
+        <div id="cart-summary"></div>
+
+        <h2>Phương thức thanh toán</h2>
+        <div class="payment-method">
+            <p>Quét mã QR để thanh toán:</p>
+            <img src="./images/qr-code.png" alt="QR Code" width="200">
+        </div>
+
+        <button onclick="confirmOrder()">Xác nhận thanh toán</button>
+    </main>
+
+    <script>
+        // Lấy giỏ hàng từ localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Hiển thị tóm tắt giỏ hàng
+        function displayCartSummary() {
+            const cartSummary = document.getElementById('cart-summary');
+            cartSummary.innerHTML = ''; // Xóa nội dung cũ
+
+            if (cart.length === 0) {
+                cartSummary.innerHTML = '<p>Giỏ hàng trống!</p>';
+                return;
+            }
+
+            let totalAmount = 0;
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.innerHTML = `
+                    <p>${item.name} - ${item.quantity} x ${item.price} VNĐ</p>
+                `;
+                cartSummary.appendChild(itemDiv);
+                totalAmount += item.quantity * item.price;
+            });
+
+            const totalDiv = document.createElement('div');
+            totalDiv.innerHTML = `<h3>Tổng cộng: ${totalAmount} VNĐ</h3>`;
+            cartSummary.appendChild(totalDiv);
+        }
+
+        // Xác nhận đơn hàng
+        function confirmOrder() {
+            if (cart.length === 0) {
+                alert('Giỏ hàng trống! Không thể thanh toán.');
+                return;
+            }
+
+            alert('Đơn hàng của bạn đã được xác nhận! Cảm ơn bạn đã mua hàng.');
+            localStorage.removeItem('cart'); // Xóa giỏ hàng sau khi thanh toán thành công
+            window.location.href = 'index.html'; // Quay lại trang chủ sau khi thanh toán
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayCartSummary();
+        });
+    </script>
 </body>
 </html>

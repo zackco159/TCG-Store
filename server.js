@@ -1,45 +1,18 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-
+const path = require('path');
 const app = express();
-app.use(cors());
-app.use(express.json());
+const port = 3000;
 
-const PORT = process.env.PORT || 5000;
+app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect('mongodb://localhost:27017/tcg-store', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.log(err));
-
-const cardSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    price: Number,
-    image: String,
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-const Card = mongoose.model('Card', cardSchema);
-
-app.get('/cards', async (req, res) => {
-    try {
-        const cards = await Card.find();
-        res.json(cards);
-    } catch (error) {
-        res.status(500).send('Lỗi lấy dữ liệu thẻ bài');
-    }
+app.get('/product-detail', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'product-detail.html'));
 });
 
-app.post('/cards', async (req, res) => {
-    try {
-        const newCard = new Card(req.body);
-        await newCard.save();
-        res.json(newCard);
-    } catch (error) {
-        res.status(500).send('Lỗi thêm thẻ bài');
-    }
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
 });
