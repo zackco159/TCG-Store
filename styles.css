@@ -30,3 +30,26 @@ button:hover {
     margin: 10px;
     text-align: center;
 }
+
+.cart-window {
+    display: none; /* Ẩn giỏ hàng mặc định */
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000;
+}
+
+.cart-window h2 {
+    margin-top: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}

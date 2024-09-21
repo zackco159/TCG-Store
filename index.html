@@ -24,6 +24,14 @@
             { id: 3, name: "Sản phẩm 3", price: 150, description: "Mô tả sản phẩm 3", image: "images/product1.jpg" }
         ];
 
+        //Hàm cửa sổ giỏ hàng
+        <div id="cart-window" class="cart-window">
+    <h2>Giỏ Hàng</h2>
+    <div id="cart-items"></div>
+    <button id="checkout-btn">Thanh Toán</button>
+</div>
+
+
         // Hàm để hiển thị sản phẩm
         function displayProducts() {
             const productList = document.getElementById("product-list");
@@ -72,6 +80,10 @@
             localStorage.setItem('cart', JSON.stringify(cart));
             alert('Sản phẩm đã được thêm vào giỏ hàng!');
         }
+
+        //Hiển thị nút giỏi hàng
+        <button id="cart-btn">Giỏ Hàng (0)</button>
+
 
         // Hiển thị sản phẩm khi trang tải
         displayProducts();
