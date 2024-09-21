@@ -7,8 +7,36 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Thanh Toán</h1>
-    <p>Cảm ơn bạn đã mua hàng!</p>
-    <button onclick="window.location.href='index.html'">Quay lại trang chủ</button>
+    <header>
+        <h1>Thanh Toán</h1>
+    </header>
+
+    <main>
+        <h2>Thông tin đơn hàng</h2>
+        <div id="order-summary"></div>
+        <button onclick="confirmPayment()">Xác nhận thanh toán</button>
+    </main>
+
+    <script>
+        function confirmPayment() {
+            alert('Thanh toán thành công!');
+            localStorage.removeItem('cart'); // Xóa giỏ hàng sau khi thanh toán
+            window.location.href = 'index.html'; // Quay lại trang chính
+        }
+
+        function displayOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const orderSummary = document.getElementById('order-summary');
+            orderSummary.innerHTML = '';
+
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.innerHTML = `<h4>${item.name} - ${item.quantity} x ${item.price} VNĐ</h4>`;
+                orderSummary.appendChild(itemDiv);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', displayOrderSummary);
+    </script>
 </body>
 </html>
