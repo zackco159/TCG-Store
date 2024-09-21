@@ -21,6 +21,16 @@ function displayProducts() {
         `;
         productList.appendChild(productDiv);
     });
+
+    // Thêm sự kiện cho nút "Thêm vào giỏ"
+    document.querySelectorAll('.btn-add').forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const name = this.getAttribute('data-name');
+            const price = this.getAttribute('data-price');
+            addToCart({ id, name, price });
+        });
+    });
 }
 
 // Hàm tìm kiếm sản phẩm
