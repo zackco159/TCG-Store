@@ -22,14 +22,12 @@
     </footer>
 
     <script>
-        // Dữ liệu sản phẩm
         const products = [
             { id: 1, name: "Sản phẩm 1", price: 100, image: "images/product1.jpg" },
             { id: 2, name: "Sản phẩm 2", price: 200, image: "images/product2.jpg" },
             { id: 3, name: "Sản phẩm 3", price: 150, image: "images/product3.jpg" }
         ];
 
-        // Hàm để hiển thị sản phẩm
         function displayProducts() {
             const productList = document.getElementById("product-list");
             productList.innerHTML = "";
@@ -47,7 +45,6 @@
             });
         }
 
-        // Hàm tìm kiếm sản phẩm
         document.getElementById('search').addEventListener('input', function() {
             const query = this.value.toLowerCase();
             const productDivs = document.querySelectorAll('.product');
@@ -58,7 +55,6 @@
             });
         });
 
-        // Thêm sản phẩm vào giỏ hàng
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('btn-add')) {
                 const product = {
@@ -67,10 +63,13 @@
                     price: parseFloat(event.target.dataset.price)
                 };
                 addToCart(product);
+            } else if (event.target.id === 'view-cart') {
+                viewCart();
+            } else if (event.target.id === 'checkout') {
+                window.location.href = 'checkout.html';
             }
         });
 
-        // Thêm sản phẩm vào giỏ hàng
         function addToCart(product) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.push(product);
@@ -78,7 +77,16 @@
             alert('Sản phẩm đã được thêm vào giỏ hàng!');
         }
 
-        // Hiển thị sản phẩm khi trang tải
+        function viewCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert("Giỏ hàng trống!");
+                return;
+            }
+            let cartDetails = cart.map(item => `${item.name} - ${item.price} VNĐ`).join('\n');
+            alert("Giỏ hàng:\n" + cartDetails);
+        }
+
         displayProducts();
     </script>
 </body>

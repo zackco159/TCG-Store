@@ -12,11 +12,13 @@
     <img src="images/qr_code.png" alt="QR Code" id="qr-code">
 
     <script>
-        // Lấy giỏ hàng từ LocalStorage
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         if (cart.length === 0) {
             alert("Giỏ hàng trống! Vui lòng thêm sản phẩm.");
             window.location.href = "index.html"; // Quay lại trang index
+        } else {
+            let cartDetails = cart.map(item => `${item.name} - ${item.price} VNĐ`).join('\n');
+            alert("Giỏ hàng:\n" + cartDetails);
         }
     </script>
 </body>
