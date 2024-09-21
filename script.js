@@ -13,7 +13,7 @@ function displayProducts() {
             <h2>${product.name}</h2>
             <img src="${product.image}" alt="${product.name}">
             <p>Giá: ${product.price} VNĐ</p>
-            <button class="btn-add" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
+            <button class="btn-add" onclick="addToCart(${product.id})">Thêm vào giỏ hàng</button>
         `;
         productList.appendChild(productDiv);
     });
