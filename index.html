@@ -10,84 +10,19 @@
     <header>
         <h1>Cửa Hàng TCG</h1>
         <input type="text" id="search" placeholder="Tìm kiếm sản phẩm...">
+        <button id="cart-btn">Giỏ Hàng (0)</button>
     </header>
 
     <main id="product-list">
         <!-- Danh sách sản phẩm sẽ được tạo ra ở đây -->
     </main>
 
-    <script>
-        // Dữ liệu sản phẩm
-        const products = [
-            { id: 1, name: "Sản phẩm 1", price: 100, description: "Mô tả sản phẩm 1", image: "images/product1.jpg" },
-            { id: 2, name: "Sản phẩm 2", price: 200, description: "Mô tả sản phẩm 2", image: "images/product1.jpg" },
-            { id: 3, name: "Sản phẩm 3", price: 150, description: "Mô tả sản phẩm 3", image: "images/product1.jpg" }
-        ];
+    <div id="cart-window" class="cart-window">
+        <h2>Giỏ Hàng</h2>
+        <div id="cart-items"></div>
+        <button id="checkout-btn">Thanh Toán</button>
+    </div>
 
-        //Hàm cửa sổ giỏ hàng
-        <div id="cart-window" class="cart-window">
-    <h2>Giỏ Hàng</h2>
-    <div id="cart-items"></div>
-    <button id="checkout-btn">Thanh Toán</button>
-</div>
-
-
-        // Hàm để hiển thị sản phẩm
-        function displayProducts() {
-            const productList = document.getElementById("product-list");
-            productList.innerHTML = ""; // Xóa nội dung cũ
-
-            products.forEach(product => {
-                const productDiv = document.createElement("div");
-                productDiv.classList.add("product");
-                productDiv.innerHTML = `
-                    <h2>${product.name}</h2>
-                    <img src="${product.image}" alt="${product.name}">
-                    <p>Giá: ${product.price} VNĐ</p>
-                    <button class="btn-add" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}">Thêm vào giỏ</button>
-                `;
-                productList.appendChild(productDiv);
-            });
-
-            // Thêm sự kiện cho nút "Thêm vào giỏ"
-            document.querySelectorAll('.btn-add').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const product = {
-                        id: event.target.dataset.id,
-                        name: event.target.dataset.name,
-                        price: event.target.dataset.price
-                    };
-                    addToCart(product);
-                });
-            });
-        }
-
-        // Hàm tìm kiếm sản phẩm
-        document.getElementById('search').addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            const productDivs = document.querySelectorAll('.product');
-            
-            productDivs.forEach(productDiv => {
-                const name = productDiv.querySelector('h2').textContent.toLowerCase();
-                productDiv.style.display = name.includes(query) ? 'block' : 'none';
-            });
-        });
-
-        // Hàm thêm sản phẩm vào giỏ hàng
-        function addToCart(product) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.push(product);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert('Sản phẩm đã được thêm vào giỏ hàng!');
-        }
-
-        //Hiển thị nút giỏi hàng
-        <button id="cart-btn">Giỏ Hàng (0)</button>
-
-
-        // Hiển thị sản phẩm khi trang tải
-        displayProducts();
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
