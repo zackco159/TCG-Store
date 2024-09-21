@@ -7,22 +7,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Chi Tiết Sản Phẩm</h1>
-        <div class="cart-icon" onclick="toggleCart()">
-            Giỏ hàng (<span id="cart-count">0</span>)
-        </div>
-    </header>
-
-    <main id="product-detail">
-        <!-- Chi tiết sản phẩm sẽ được hiển thị ở đây -->
-    </main>
-
-    <div id="cart-popup" class="cart-popup">
-        <h3>Giỏ Hàng</h3>
-        <div id="cart-list"></div>
-        <button onclick="checkout()">Thanh Toán</button>
-        <button onclick="toggleCart()">Đóng</button>
+    <div class="product-detail">
+        <img src="images/product1.jpg" alt="Product Image">
+        <h1>Tên Sản Phẩm</h1>
+        <p>Mô tả sản phẩm chi tiết.</p>
+        <p>Giá: 100.000 VNĐ</p>
+        <button id="add-to-cart">Thêm vào giỏ hàng</button>
     </div>
 
     <script src="product-detail.js"></script>

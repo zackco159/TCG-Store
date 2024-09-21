@@ -1,18 +1,23 @@
 const express = require('express');
 const path = require('path');
-const app = express();
-const port = 3000;
 
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Cấu hình express để phục vụ các tệp tĩnh
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Định nghĩa các đường dẫn
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get('/product-detail', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'product-detail.html'));
+// Bắt lỗi không tìm thấy
+app.use((req, res) => {
+    res.status(404).send('404 Not Found');
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+// Khởi động server
+app.listen(PORT, () => {
+    console.log(`Server đang chạy trên http://localhost:${PORT}`);
 });

@@ -1,19 +1,9 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const productDetail = document.getElementById('product-detail');
-
+document.getElementById('add-to-cart').addEventListener('click', function() {
     const product = {
-        id: '1',
-        name: 'Thẻ Bài XYZ',
-        price: 100000,
-        image: './images/product-xyz.jpg',
-        description: 'Thẻ bài hiếm với sức mạnh đặc biệt.'
+        id: 'product1', // ID sản phẩm
+        name: 'Tên Sản Phẩm',
+        price: 100000
     };
 
-    productDetail.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <h2>${product.name}</h2>
-        <p>${product.description}</p>
-        <p>Giá: ${product.price} VNĐ</p>
-        <button onclick="addToCart(${JSON.stringify(product)})">Thêm vào giỏ hàng</button>
-    `;
+    addToCart(product);
 });
