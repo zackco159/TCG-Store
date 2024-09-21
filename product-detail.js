@@ -15,12 +15,16 @@ function displayProduct(productId) {
             <h2>${product.name}</h2>
             <img src="${product.image}" alt="${product.name}">
             <p>Giá: ${product.price} VNĐ</p>
-            <button onclick="addToCart(product)">Thêm vào giỏ hàng</button>
+            <button onclick="addToCart(${product.id})">Thêm vào giỏ hàng</button>
         `;
+    } else {
+        productDetail.innerHTML = '<p>Sản phẩm không tồn tại!</p>'; // Thông báo khi sản phẩm không tìm thấy
     }
 }
 
 // Gọi hàm hiển thị sản phẩm khi trang được tải
-const urlParams = new URLSearchParams(window.location.search);
-const productId = parseInt(urlParams.get('id'));
-displayProduct(productId);
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = parseInt(urlParams.get('id'));
+    displayProduct(productId);
+});
