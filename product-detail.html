@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,25 +11,26 @@
         <img src="images/product1.jpg" alt="Product Image">
         <h1>Tên Sản Phẩm</h1>
         <p>Mô tả sản phẩm chi tiết.</p>
-        <p>Giá: 100.000 VND</p>
+        <p>Giá: 100.000 VNĐ</p>
         <button id="add-to-cart">Thêm vào giỏ hàng</button>
     </div>
 
     <script>
         document.getElementById('add-to-cart').addEventListener('click', function() {
             const product = {
-                id: 'product1', // ID sản phẩm
+                id: 'product1',
                 name: 'Tên Sản Phẩm',
-                price: 100000
+                price: 100000 // Bạn có thể thay đổi giá ở đây
             };
+            addToCart(product);
+        });
 
-            // Thêm sản phẩm vào giỏ hàng
+        function addToCart(product) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.push(product);
             localStorage.setItem('cart', JSON.stringify(cart));
-
             alert('Sản phẩm đã được thêm vào giỏ hàng!');
-        });
+        }
     </script>
 </body>
 </html>

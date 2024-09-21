@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,16 +10,5 @@
     <h1>Thanh Toán</h1>
     <p>Vui lòng quét mã QR để thanh toán:</p>
     <img src="images/qr_code.png" alt="QR Code" id="qr-code">
-
-    <script>
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (cart.length === 0) {
-            alert("Giỏ hàng trống! Vui lòng thêm sản phẩm.");
-            window.location.href = "index.html"; // Quay lại trang index
-        } else {
-            let cartDetails = cart.map(item => `${item.name} - ${item.price} VNĐ`).join('\n');
-            alert("Giỏ hàng:\n" + cartDetails);
-        }
-    </script>
 </body>
 </html>

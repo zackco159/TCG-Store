@@ -35,17 +35,6 @@ app.get('/cards', async (req, res) => {
     }
 });
 
-// Tạo route để thêm thẻ bài mới
-app.post('/cards', async (req, res) => {
-    try {
-        const newCard = new Card(req.body);
-        await newCard.save();
-        res.json(newCard);
-    } catch (error) {
-        res.status(500).send('Lỗi thêm thẻ bài');
-    }
-});
-
 // Khởi động server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
