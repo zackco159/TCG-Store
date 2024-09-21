@@ -13,11 +13,12 @@ function displayProducts() {
             <h2>${product.name}</h2>
             <img src="${product.image}" alt="${product.name}">
             <p>Giá: ${product.price} VNĐ</p>
-            <button class="btn-add" onclick="addToCart(${product.id})">Thêm vào giỏ hàng</button>
+            <button class="btn-add" onclick="addToCart(${JSON.stringify(product)})">Thêm vào giỏ hàng</button>
         `;
         productList.appendChild(productDiv);
     });
 }
+
 
 // Hàm tìm kiếm sản phẩm
 document.getElementById('search').addEventListener('input', function() {
