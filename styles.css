@@ -11,13 +11,6 @@ body {
     width: 200px;
 }
 
-.product {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-}
-
 button {
     background-color: #28a745;
     color: white;
@@ -33,10 +26,11 @@ button:hover {
 .cart-popup {
     display: none;
     position: fixed;
+    top: 50px;
     right: 20px;
-    top: 100px;
     background-color: white;
     border: 1px solid #ccc;
     padding: 20px;
-    z-index: 1000;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }

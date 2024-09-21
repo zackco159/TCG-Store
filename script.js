@@ -1,13 +1,13 @@
-// Dữ liệu sản phẩm mẫu
+// Tạo danh sách sản phẩm mẫu
 const products = [
-    { id: 'product1', name: 'Sản phẩm 1', price: 100000, image: './images/product-1.jpg' },
-    { id: 'product2', name: 'Sản phẩm 2', price: 200000, image: './images/product-2.jpg' },
-    { id: 'product3', name: 'Sản phẩm 3', price: 150000, image: './images/product-3.jpg' }
+    { id: 1, name: "Sản phẩm 1", price: 100, image: "./images/product-1.jpg" },
+    { id: 2, name: "Sản phẩm 2", price: 200, image: "./images/product-2.jpg" },
+    { id: 3, name: "Sản phẩm 3", price: 150, image: "./images/product-3.jpg" },
 ];
 
 // Hàm để hiển thị sản phẩm
 function displayProducts() {
-    const productList = document.getElementById('product-list');
+    const productList = document.getElementById("product-list");
     productList.innerHTML = ""; // Xóa nội dung cũ
 
     products.forEach(product => {
@@ -17,19 +17,9 @@ function displayProducts() {
             <h2>${product.name}</h2>
             <img src="${product.image}" alt="${product.name}">
             <p>Giá: ${product.price} VNĐ</p>
-            <button class="btn-add" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}">Thêm vào giỏ</button>
+            <button class="btn-add" onclick="addToCart(product)">Thêm vào giỏ</button>
         `;
         productList.appendChild(productDiv);
-    });
-
-    // Thêm sự kiện cho nút "Thêm vào giỏ"
-    document.querySelectorAll('.btn-add').forEach(button => {
-        button.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            const name = this.getAttribute('data-name');
-            const price = this.getAttribute('data-price');
-            addToCart({ id, name, price });
-        });
     });
 }
 
@@ -37,7 +27,7 @@ function displayProducts() {
 document.getElementById('search').addEventListener('input', function() {
     const query = this.value.toLowerCase();
     const productDivs = document.querySelectorAll('.product');
-
+    
     productDivs.forEach(productDiv => {
         const name = productDiv.querySelector('h2').textContent.toLowerCase();
         productDiv.style.display = name.includes(query) ? 'block' : 'none';
