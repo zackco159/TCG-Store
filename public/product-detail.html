@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Chi Tiết Sản Phẩm</h1>
+        <div class="cart-icon" onclick="toggleCart()">
+            Giỏ hàng (<span id="cart-count">0</span>)
+        </div>
+    </header>
+
+    <main id="product-detail"></main>
+
+    <div id="cart-popup" class="cart-popup" style="display: none;">
+        <h3>Giỏ Hàng</h3>
+        <div id="cart-list"></div>
+        <button onclick="checkout()">Thanh Toán</button>
+        <button onclick="toggleCart()">Đóng</button>
+    </div>
+
+    <script src="product-detail.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
