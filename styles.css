@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
 }
 
 header {
@@ -7,50 +8,48 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #f8f8f8;
+    background-color: #28a745;
+    color: white;
 }
 
 input[type="text"] {
     padding: 5px;
-    width: 300px;
-}
-
-.cart-icon {
-    cursor: pointer;
-}
-
-#category-filters {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-#category-filters button {
-    margin: 0 5px;
-    padding: 10px 20px;
-}
-
-#product-list {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    border: 1px solid #ccc;
 }
 
 .product {
-    border: 1px solid #ddd;
-    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     margin: 10px;
-    width: 30%;
+    padding: 10px;
     text-align: center;
+    background-color: white;
+}
+
+.product img {
+    width: 100px;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
 }
 
 .cart-popup {
+    display: none;
     position: fixed;
-    top: 20%;
-    right: 10px;
-    width: 300px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    top: 50px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
