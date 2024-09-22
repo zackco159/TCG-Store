@@ -13,7 +13,34 @@ function addToCart(productId) {
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Sản phẩm đã được thêm vào giỏ hàng!');
+    updateCartCount();
+    displayCart();
+}
+
+// Giảm số lượng sản phẩm
+function decreaseQuantity(productId) {
+    const product = cart.find(item => item.id === productId);
+    
+    if (product && product.quantity > 1) {
+        product.quantity--;
+    } else {
+        cart = cart.filter(item => item.id !== productId);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    displayCart();
+}
+
+// Tăng số lượng sản phẩm
+function increaseQuantity(productId) {
+    const product = cart.find(item => item.id === productId);
+    
+    if (product) {
+        product.quantity++;
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
     displayCart();
 }
@@ -38,6 +65,8 @@ function displayCart() {
                 <h4>${item.name}</h4>
                 <p>Giá: ${item.price} VNĐ</p>
                 <p>Số lượng: ${item.quantity}</p>
+                <button onclick="decreaseQuantity(${item.id})">-</button>
+                <button onclick="increaseQuantity(${item.id})">+</button>
                 <button onclick="removeFromCart(${item.id})">Xóa</button>
             `;
             cartList.appendChild(itemDiv);

@@ -1,9 +1,9 @@
 let products = [];
 
-// Hiển thị danh sách sản phẩm
+// Hàm để hiển thị sản phẩm
 function displayProducts() {
     const productList = document.getElementById("product-list");
-    productList.innerHTML = "";
+    productList.innerHTML = ""; // Xóa nội dung cũ
 
     products.forEach(product => {
         const productDiv = document.createElement("div");
@@ -18,7 +18,7 @@ function displayProducts() {
     });
 }
 
-// Tìm kiếm sản phẩm
+// Hàm tìm kiếm sản phẩm
 document.getElementById('search').addEventListener('input', function() {
     const query = this.value.toLowerCase();
     const productDivs = document.querySelectorAll('.product');
@@ -29,12 +29,12 @@ document.getElementById('search').addEventListener('input', function() {
     });
 });
 
-// Tải dữ liệu sản phẩm
+// Gọi hàm để lấy dữ liệu sản phẩm từ cart.js
 document.addEventListener('DOMContentLoaded', () => {
     products = [
-        { id: 1, name: 'Sản phẩm 1', price: 100000, image: 'images/product-1.jpg' },
-        { id: 2, name: 'Sản phẩm 2', price: 200000, image: 'images/product-2.jpg' },
-        { id: 3, name: 'Sản phẩm 3', price: 300000, image: 'images/product-3.jpg' }
+        { id: 1, name: "Sản phẩm 1", price: 100, image: "./images/product-1.jpg" },
+        { id: 2, name: "Sản phẩm 2", price: 200, image: "./images/product-2.jpg" },
+        { id: 3, name: "Sản phẩm 3", price: 150, image: "./images/product-3.jpg" },
     ];
-    displayProducts();
+    displayProducts(); // Hiển thị sản phẩm khi trang tải
 });
