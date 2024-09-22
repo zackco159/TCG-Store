@@ -17,6 +17,24 @@
 
     <main id="product-list">
         <!-- Danh sách sản phẩm sẽ được tạo ra ở đây -->
+        <div class="product">
+            <h2>Sản phẩm 1</h2>
+            <img src="./images/product-1.jpg" alt="Sản phẩm 1">
+            <p>Giá: 100 VNĐ</p>
+            <button class="btn-add" onclick="addToCart({ id: 1, name: 'Sản phẩm 1', price: 100 })">Thêm vào giỏ</button>
+        </div>
+        <div class="product">
+            <h2>Sản phẩm 2</h2>
+            <img src="./images/product-2.jpg" alt="Sản phẩm 2">
+            <p>Giá: 200 VNĐ</p>
+            <button class="btn-add" onclick="addToCart({ id: 2, name: 'Sản phẩm 2', price: 200 })">Thêm vào giỏ</button>
+        </div>
+        <div class="product">
+            <h2>Sản phẩm 3</h2>
+            <img src="./images/product-3.jpg" alt="Sản phẩm 3">
+            <p>Giá: 150 VNĐ</p>
+            <button class="btn-add" onclick="addToCart({ id: 3, name: 'Sản phẩm 3', price: 150 })">Thêm vào giỏ</button>
+        </div>
     </main>
 
     <div id="cart-popup" class="cart-popup" style="display: none;">
@@ -26,7 +44,7 @@
         <button onclick="toggleCart()">Đóng</button>
     </div>
 
-    <script src="cart.js"></script>
     <script src="script.js"></script>
+    <script src="cart.js"></script>
 </body>
 </html>

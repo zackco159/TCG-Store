@@ -2,7 +2,10 @@
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Hàm thêm sản phẩm vào giỏ hàng
-function addToCart(product) {
+function addToCart(productId) {
+    const product = products.find(item => item.id === productId); // Lấy sản phẩm theo ID
+    if (!product) return; // Nếu không tìm thấy sản phẩm, dừng lại
+
     const existingProduct = cart.find(item => item.id === product.id);
     if (existingProduct) {
         existingProduct.quantity++;
@@ -13,6 +16,7 @@ function addToCart(product) {
     localStorage.setItem('cart', JSON.stringify(cart));
     alert('Sản phẩm đã được thêm vào giỏ hàng!');
     updateCartCount();
+    displayCart(); // Cập nhật giỏ hàng
 }
 
 // Cập nhật số lượng sản phẩm trong giỏ hàng
@@ -26,17 +30,22 @@ function displayCart() {
     const cartList = document.getElementById('cart-list');
     cartList.innerHTML = ''; // Xóa nội dung cũ
 
+    if (cart.length === 0) {
+        cartList.innerHTML = '<p>Giỏ hàng trống!</p>';
+        return;
+    }
+
     cart.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.innerHTML = `
             <h4>${item.name}</h4>
             <p>Giá: ${item.price} VNĐ</p>
             <p>Số lượng: 
-                <button onclick="updateQuantity('${item.id}', -1)">-</button>
-                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity('${item.id}', this.value)">
-                <button onclick="updateQuantity('${item.id}', 1)">+</button>
+                <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)">
+                <button onclick="updateQuantity(${item.id}, 1)">+</button>
             </p>
-            <button onclick="removeFromCart('${item.id}')">Xóa</button>
+            <button onclick="removeFromCart(${item.id})">Xóa</button>
         `;
         cartList.appendChild(itemDiv);
     });
@@ -52,7 +61,7 @@ function updateQuantity(id, change) {
             item.quantity += change;
             if (item.quantity < 1) item.quantity = 1; // Đảm bảo số lượng không âm
         } else {
-            item.quantity = parseInt(change);
+            item.quantity = parseInt(change) || 1; // Nếu không hợp lệ, gán là 1
         }
         localStorage.setItem('cart', JSON.stringify(cart));
         displayCart();

@@ -1,5 +1,9 @@
-// Sử dụng biến products từ tệp cart.js
-let products = [];
+// Dữ liệu sản phẩm mẫu
+let products = [
+    { id: 1, name: "Sản phẩm 1", price: 100, image: "./images/product-1.jpg" },
+    { id: 2, name: "Sản phẩm 2", price: 200, image: "./images/product-2.jpg" },
+    { id: 3, name: "Sản phẩm 3", price: 150, image: "./images/product-3.jpg" },
+];
 
 // Hàm để hiển thị sản phẩm
 function displayProducts() {
@@ -13,7 +17,7 @@ function displayProducts() {
             <h2>${product.name}</h2>
             <img src="${product.image}" alt="${product.name}">
             <p>Giá: ${product.price} VNĐ</p>
-            <button class="btn-add" onclick="addToCart(${JSON.stringify(product)})">Thêm vào giỏ</button>
+            <button class="btn-add" onclick="addToCart(${product.id})">Thêm vào giỏ</button>
         `;
         productList.appendChild(productDiv);
     });
@@ -30,12 +34,7 @@ document.getElementById('search').addEventListener('input', function() {
     });
 });
 
-// Gọi hàm để lấy dữ liệu sản phẩm
+// Gọi hàm để hiển thị sản phẩm khi trang tải
 document.addEventListener('DOMContentLoaded', () => {
-    products = [
-        { id: 1, name: "Sản phẩm 1", price: 100, image: "./images/product-1.jpg" },
-        { id: 2, name: "Sản phẩm 2", price: 200, image: "./images/product-2.jpg" },
-        { id: 3, name: "Sản phẩm 3", price: 150, image: "./images/product-3.jpg" },
-    ];
-    displayProducts(); // Hiển thị sản phẩm khi trang tải
+    displayProducts();
 });
