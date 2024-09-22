@@ -32,6 +32,7 @@ function displayCart() {
 
     if (cart.length === 0) {
         cartList.innerHTML = '<p>Giỏ hàng trống!</p>';
+        updateCartCount(); // Đảm bảo số lượng giỏ hàng được cập nhật
         return;
     }
 
