@@ -1,13 +1,9 @@
-let products = [
-    { id: 1, name: "Sản phẩm 1", price: 100, image: "./images/product-1.jpg" },
-    { id: 2, name: "Sản phẩm 2", price: 200, image: "./images/product-2.jpg" },
-    { id: 3, name: "Sản phẩm 3", price: 150, image: "./images/product-3.jpg" },
-];
+let products = [];
 
-// Hàm để hiển thị sản phẩm
+// Hiển thị danh sách sản phẩm
 function displayProducts() {
     const productList = document.getElementById("product-list");
-    productList.innerHTML = ""; // Xóa nội dung cũ
+    productList.innerHTML = "";
 
     products.forEach(product => {
         const productDiv = document.createElement("div");
@@ -22,7 +18,7 @@ function displayProducts() {
     });
 }
 
-// Hàm tìm kiếm sản phẩm
+// Tìm kiếm sản phẩm
 document.getElementById('search').addEventListener('input', function() {
     const query = this.value.toLowerCase();
     const productDivs = document.querySelectorAll('.product');
@@ -33,5 +29,12 @@ document.getElementById('search').addEventListener('input', function() {
     });
 });
 
-// Hiển thị sản phẩm khi trang tải
-document.addEventListener('DOMContentLoaded', displayProducts);
+// Tải dữ liệu sản phẩm
+document.addEventListener('DOMContentLoaded', () => {
+    products = [
+        { id: 1, name: 'Sản phẩm 1', price: 100000, image: 'images/product-1.jpg' },
+        { id: 2, name: 'Sản phẩm 2', price: 200000, image: 'images/product-2.jpg' },
+        { id: 3, name: 'Sản phẩm 3', price: 300000, image: 'images/product-3.jpg' }
+    ];
+    displayProducts();
+});

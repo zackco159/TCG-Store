@@ -1,47 +1,48 @@
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Hàm thêm sản phẩm vào giỏ hàng
+// Thêm sản phẩm vào giỏ hàng
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
-    if (product) {
-        const existingProduct = cart.find(item => item.id === product.id);
-        if (existingProduct) {
-            existingProduct.quantity++;
-        } else {
-            product.quantity = 1; // Thêm thuộc tính số lượng
-            cart.push(product);
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert('Sản phẩm đã được thêm vào giỏ hàng!');
-        updateCartCount();
+    const existingProduct = cart.find(item => item.id === product.id);
+
+    if (existingProduct) {
+        existingProduct.quantity++;
+    } else {
+        product.quantity = 1;
+        cart.push(product);
     }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Sản phẩm đã được thêm vào giỏ hàng!');
+    updateCartCount();
+    displayCart();
 }
 
-// Cập nhật số lượng sản phẩm trong giỏ hàng
+// Cập nhật số lượng giỏ hàng
 function updateCartCount() {
     const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
     document.getElementById('cart-count').innerText = cartCount;
 }
 
-// Hiển thị giỏ hàng
+// Hiển thị giỏ hàng trong popup
 function displayCart() {
     const cartList = document.getElementById('cart-list');
-    cartList.innerHTML = ''; // Xóa nội dung cũ
+    cartList.innerHTML = '';
 
-    cart.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.innerHTML = `
-            <h4>${item.name}</h4>
-            <p>Giá: ${item.price} VNĐ</p>
-            <p>Số lượng: 
-                <button onclick="updateQuantity('${item.id}', -1)">-</button>
-                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity('${item.id}', this.value)">
-                <button onclick="updateQuantity('${item.id}', 1)">+</button>
-            </p>
-            <button onclick="removeFromCart('${item.id}')">Xóa</button>
-        `;
-        cartList.appendChild(itemDiv);
-    });
+    if (cart.length === 0) {
+        cartList.innerHTML = '<p>Giỏ hàng trống</p>';
+    } else {
+        cart.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.innerHTML = `
+                <h4>${item.name}</h4>
+                <p>Giá: ${item.price} VNĐ</p>
+                <p>Số lượng: ${item.quantity}</p>
+                <button onclick="removeFromCart(${item.id})">Xóa</button>
+            `;
+            cartList.appendChild(itemDiv);
+        });
+    }
 
     updateCartCount();
 }
@@ -59,14 +60,17 @@ function checkout() {
         alert('Giỏ hàng trống!');
         return;
     }
-    window.location.href = 'checkout.html'; // Chuyển đến trang thanh toán
+    window.location.href = 'checkout.html';
 }
 
-// Bật tắt giỏ hàng
+// Bật/tắt giỏ hàng popup
 function toggleCart() {
     const cartPopup = document.getElementById('cart-popup');
     cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : 'block';
 }
 
 // Gọi hàm hiển thị giỏ hàng khi trang được tải
-document.addEventListener('DOMContentLoaded', displayCart);
+document.addEventListener('DOMContentLoaded', () => {
+    displayCart();
+    updateCartCount();
+});
