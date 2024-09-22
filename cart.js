@@ -1,105 +1,50 @@
+// js/cart.js
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Thêm sản phẩm vào giỏ hàng
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    const existingProduct = cart.find(item => item.id === product.id);
-
-    if (existingProduct) {
-        existingProduct.quantity++;
+function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    const itemInCart = cart.find(item => item.id === id);
+    if (itemInCart) {
+        itemInCart.quantity++;
     } else {
-        product.quantity = 1;
-        cart.push(product);
+        cart.push({ ...product, quantity: 1 });
     }
-
     localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    displayCart();
+    updateCart();
 }
 
-// Giảm số lượng sản phẩm
-function decreaseQuantity(productId) {
-    const product = cart.find(item => item.id === productId);
-    
-    if (product && product.quantity > 1) {
-        product.quantity--;
-    } else {
-        cart = cart.filter(item => item.id !== productId);
-    }
+function updateCart() {
+    const cartCount = document.getElementById('cart-count');
+    cartCount.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    displayCart();
-}
-
-// Tăng số lượng sản phẩm
-function increaseQuantity(productId) {
-    const product = cart.find(item => item.id === productId);
-    
-    if (product) {
-        product.quantity++;
-    }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    displayCart();
-}
-
-// Cập nhật số lượng giỏ hàng
-function updateCartCount() {
-    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-    document.getElementById('cart-count').innerText = cartCount;
-}
-
-// Hiển thị giỏ hàng trong popup
-function displayCart() {
     const cartList = document.getElementById('cart-list');
     cartList.innerHTML = '';
+    cart.forEach(item => {
+        cartList.innerHTML += `<div>${item.name} - ${item.quantity}</div>
+            <button onclick="changeQuantity(${item.id}, -1)">-</button>
+            <button onclick="changeQuantity(${item.id}, 1)">+</button>`;
+    });
+}
 
-    if (cart.length === 0) {
-        cartList.innerHTML = '<p>Giỏ hàng trống</p>';
-    } else {
-        cart.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.innerHTML = `
-                <h4>${item.name}</h4>
-                <p>Giá: ${item.price} VNĐ</p>
-                <p>Số lượng: ${item.quantity}</p>
-                <button onclick="decreaseQuantity(${item.id})">-</button>
-                <button onclick="increaseQuantity(${item.id})">+</button>
-                <button onclick="removeFromCart(${item.id})">Xóa</button>
-            `;
-            cartList.appendChild(itemDiv);
-        });
+function changeQuantity(id, amount) {
+    const item = cart.find(item => item.id === id);
+    if (item) {
+        item.quantity += amount;
+        if (item.quantity === 0) {
+            cart = cart.filter(i => i.id !== id);
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart();
     }
-
-    updateCartCount();
 }
 
-// Xóa sản phẩm khỏi giỏ hàng
-function removeFromCart(id) {
-    cart = cart.filter(item => item.id !== id);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    displayCart();
-}
-
-// Thanh toán
-function checkout() {
-    if (cart.length === 0) {
-        alert('Giỏ hàng trống!');
-        return;
-    }
-    window.location.href = 'checkout.html';
-}
-
-// Bật/tắt giỏ hàng popup
 function toggleCart() {
     const cartPopup = document.getElementById('cart-popup');
     cartPopup.style.display = cartPopup.style.display === 'block' ? 'none' : 'block';
 }
 
-// Gọi hàm hiển thị giỏ hàng khi trang được tải
-document.addEventListener('DOMContentLoaded', () => {
-    displayCart();
-    updateCartCount();
-});
+function checkout() {
+    alert('Chức năng thanh toán sẽ được phát triển sau!');
+}
+
+document.addEventListener('DOMContentLoaded', updateCart);

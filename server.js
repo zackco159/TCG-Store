@@ -1,15 +1,31 @@
 const express = require('express');
-const path = require('path');
-
+const bodyParser = require('body-parser');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = 3000;
 
-app.use(express.static('public'));
+// Middleware
+app.use(bodyParser.json());
+app.use(express.static('public')); // Chứa file tĩnh như HTML, CSS, JS
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Dữ liệu người dùng
+let users = [];
+
+// Đăng ký người dùng
+app.post('/signup', (req, res) => {
+    const { username, email, password } = req.body;
+    users.push({ username, email, password });
+    res.send('Đăng ký thành công');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+// Đăng nhập người dùng
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    const user = users.find(u => u.email === email && u.password === password);
+    if (user) {
+        res.send('Đăng nhập thành công');
+    } else {
+        res.status(401).send('Sai thông tin đăng nhập');
+    }
 });
+
+app.listen(port, () => console.log(`Server đang chạy trên cổng ${port}`));
